@@ -2,17 +2,44 @@
 
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
+import Countdown, { CountdownRenderProps } from 'react-countdown'
+import { useState, useEffect } from 'react'
+
+const Completionist = () => <span>¡El evento comenzó! 🎉</span>
 
 export default function Home() {
     const router = useRouter()
+    const [isClient, setIsClient] = useState(false)
+
+    // Efecto para asegurar que el componente solo se renderice en el cliente
+    useEffect(() => {
+        setIsClient(true)
+    }, [])
+
+    // Renderizado personalizado del contador
+    const countdownRenderer = ({ days, hours, minutes, seconds, completed }: CountdownRenderProps) => {
+        if (completed) {
+            return <Completionist />
+        } else {
+            return (
+                <div className="text-white text-lg mb-8">
+                    <span>{days} días </span>
+                    <span>{hours} horas </span>
+                    <span>{minutes} minutos </span>
+                    <span>{seconds} segundos</span>
+                </div>
+            )
+        }
+    }
 
     return (
-        <main className="min-h-screen flex flex-col items-center justify-center px-6 py-12 bg-gradient-to-br from-pink-100 to-white text-center">
+        <main className="min-h-screen flex flex-col items-center justify-center px-6 py-12 bg-cover bg-center relative" style={{ backgroundImage: "url('/15.jpg')" }}>
+            <div className="absolute inset-0 bg-black opacity-50"></div>
             <motion.h1
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="text-4xl font-bold text-pink-600 mb-4"
+                className="text-4xl font-bold text-white mb-4 z-10"
             >
                 ¡Estás invitado!
             </motion.h1>
@@ -21,16 +48,26 @@ export default function Home() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.6 }}
-                className="text-gray-700 text-lg mb-8 max-w-md"
+                className="text-white text-lg mb-8 max-w-md z-10"
             >
                 Te esperamos para celebrar juntos un día muy especial. Confirmá tu asistencia con el siguiente botón.
             </motion.p>
 
+            {/* Solo renderiza el Countdown si es el cliente */}
+
+            {isClient && (
+                <div className="z-20">
+                    <Countdown
+                        date={new Date('2025-08-22T23:59:59')}
+                        renderer={countdownRenderer}
+                    />
+                </div>
+            )}
             <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => router.push('/formulario')}
-                className="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition"
+                className="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition z-10"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6, duration: 0.4 }}
