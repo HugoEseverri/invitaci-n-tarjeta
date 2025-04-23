@@ -33,13 +33,13 @@ export default function Home() {
     }
 
     return (
-        <main className="min-h-screen flex flex-col items-center justify-center px-6 py-12 bg-cover bg-center relative" style={{ backgroundImage: "url('/15.jpg')" }}>
-            <div className="absolute inset-0 bg-black opacity-50"></div>
+        <main className="min-h-screen flex flex-col items-center justify-center px-6 py-12 bg-cover bg-center relative" style={{ backgroundImage: "url('/15-2.png')" }}>
+            <div className="absolute inset-0 bg-black opacity-10"></div>
             <motion.h1
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="text-4xl font-bold text-white mb-4 z-10"
+                className="text-4xl font-bold text-black mb-4 z-10"
             >
                 ¡Estás invitado!
             </motion.h1>
