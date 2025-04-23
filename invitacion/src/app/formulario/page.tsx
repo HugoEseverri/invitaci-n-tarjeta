@@ -7,7 +7,8 @@ import { useRouter } from "next/navigation";
 export default function Formulario() {
     const [nombreApellido, setNombreApellido] = useState("");
     const [asistira, setAsistira] = useState<boolean | null>(null);
-    const [restricciones, setRestricciones] = useState("");
+    const [restricciones, setRestricciones] = useState<'sí' | 'no'>('no');
+    const [restriccionesText, setRestriccionesText] = useState('');
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState('');
     const router = useRouter();
@@ -30,14 +31,16 @@ export default function Formulario() {
             email,
         });
 
-        const { data, error } = await supabase.from('respuestas').insert([
-            {
-                nombre_apellido: nombreApellido,
-                asistira: asistira === true, // <-- fuerza booleano puro
-                restricciones: restricciones || null,
-                email,
-            },
-        ]).select("*");
+        // Si el usuario seleccionó "No" en restricciones, no enviamos el campo
+        const restriccionesFinal = restricciones === 'sí' ? restriccionesText : null;
+
+        // Enviar datos a Supabase
+        const { data, error } = await supabase.from('respuestas').insert([{
+            nombre_apellido: nombreApellido,
+            asistira: asistira === true, // <-- fuerza booleano puro
+            restricciones: restriccionesFinal, // Solo enviamos texto si es "Sí", sino null
+            email,
+        }]).select("*");
 
         console.log("📦 Guardado en Supabase:", data);
 
@@ -48,7 +51,6 @@ export default function Formulario() {
         } else {
             try {
                 const res = await fetch('/api/send', {
-                    
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ to: email, nombre: nombreApellido }),
@@ -108,12 +110,42 @@ export default function Formulario() {
                 </div>
 
                 <h2 className="text-black">¿Tenés alguna restricción alimentaria?</h2>
-                <textarea
-                    placeholder="¿Tenés alguna restricción alimentaria?"
-                    value={restricciones}
-                    onChange={(e) => setRestricciones(e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-pink-400 text-black"
-                />
+
+                {/* Selección de sí/no */}
+                <div className="flex items-center mb-4">
+                    <label className="mr-4">
+                        <input
+                            type="radio"
+                            name="restriccion"
+                            value="sí"
+                            checked={restricciones === 'sí'}
+                            onChange={() => setRestricciones('sí')}
+                            className="mr-2"
+                        />
+                        Sí
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="restriccion"
+                            value="no"
+                            checked={restricciones === 'no'}
+                            onChange={() => setRestricciones('no')}
+                            className="mr-2"
+                        />
+                        No
+                    </label>
+                </div>
+
+                {/* Si la opción es "Sí", mostramos el textarea */}
+                {restricciones === 'sí' && (
+                    <textarea
+                        placeholder="Escribí tus restricciones alimentarias..."
+                        value={restriccionesText}
+                        onChange={(e) => setRestriccionesText(e.target.value)}
+                        className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-pink-400 text-black"
+                    />
+                )}
 
                 <h2 className="text-black">Email</h2>
                 <input

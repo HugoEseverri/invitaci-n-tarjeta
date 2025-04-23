@@ -37,9 +37,14 @@ export default function GuestList() {
         .filter((guest) => {
             if (filtro === 'confirmados') return guest.asistira;
             if (filtro === 'noConfirmados') return !guest.asistira;
-            if (filtro === 'conRestricciones') return guest.restricciones?.trim() !== '';
+            if (filtro === 'conRestricciones') {
+                // Asegúrate de que no se incluyan 'no' ni valores vacíos en las restricciones
+                return guest.restricciones && guest.restricciones.trim() !== '' && guest.restricciones.toLowerCase() !== 'no';
+            }
             return true; // todos
         });
+
+
 
     // 📊 Contadores
     const total = guests.length;
@@ -121,9 +126,8 @@ export default function GuestList() {
                         {filteredGuests.map((guest) => (
                             <tr
                                 key={guest.id}
-                                className={`border-t border-gray-200 hover:bg-gray-50 transition-colors ${
-                                    deletingId === guest.id ? 'opacity-0 transition-opacity duration-300' : ''
-                                }`}
+                                className={`border-t border-gray-200 hover:bg-gray-50 transition-colors ${deletingId === guest.id ? 'opacity-0 transition-opacity duration-300' : ''
+                                    }`}
                             >
                                 <td className="px-4 py-2">{guest.nombre_apellido}</td>
                                 <td className="px-4 py-2">{guest.email}</td>
