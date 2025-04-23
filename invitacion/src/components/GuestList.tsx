@@ -2,58 +2,147 @@
 
 import { useState, useEffect } from 'react'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { FiTrash2 } from 'react-icons/fi'
 
 type Guest = {
     id: number;
     nombre_apellido: string;
     email: string;
-    asistencia: boolean;
+    asistira: boolean;
     restricciones?: string;
 }
 
 export default function GuestList() {
     const supabase = createClientComponentClient();
     const [guests, setGuests] = useState<Guest[]>([]);
+    const [searchText, setSearchText] = useState('');
+    const [filtro, setFiltro] = useState<'todos' | 'confirmados' | 'noConfirmados' | 'conRestricciones'>('todos');
+    const [deletingId, setDeletingId] = useState<number | null>(null);
 
     useEffect(() => {
         const fetchGuests = async () => {
-            console.log('Fetching guests...');  // Verificar si la función de fetch se está ejecutando
             const { data, error } = await supabase.from('respuestas').select('*').order('nombre_apellido', { ascending: true });
 
             if (error) {
-                console.log('Error al obtener los datos:', error);  // Verificar si hay algún error en la consulta
+                console.log('Error al obtener los datos:', error);
             } else {
-                console.log('Datos obtenidos:', data);  // Verificar si los datos se están recuperando correctamente
-                setGuests(data);  // Asignar los datos a la lista de invitados
+                setGuests(data);
             }
         };
         fetchGuests();
     }, []);
 
-    console.log('Lista de invitados:', guests);  // Verificar si los datos se guardaron correctamente en el estado
+    const filteredGuests = guests
+        .filter((guest) => guest.nombre_apellido.toLowerCase().includes(searchText.toLowerCase()))
+        .filter((guest) => {
+            if (filtro === 'confirmados') return guest.asistira;
+            if (filtro === 'noConfirmados') return !guest.asistira;
+            if (filtro === 'conRestricciones') return guest.restricciones?.trim() !== '';
+            return true; // todos
+        });
+
+    // 📊 Contadores
+    const total = guests.length;
+    const confirmados = guests.filter(g => g.asistira).length;
+    const noConfirmados = guests.filter(g => !g.asistira).length;
+    const conRestricciones = guests.filter(g => g.restricciones?.trim() !== '').length;
+
+    const handleDelete = async (id: number) => {
+        const confirmDelete = window.confirm('¿Estás seguro de que querés eliminar este contacto?');
+        if (!confirmDelete) return;
+
+        setDeletingId(id);
+
+        // Esperar 300ms para la animación de fade-out
+        setTimeout(async () => {
+            const { error } = await supabase.from('respuestas').delete().eq('id', id);
+            if (error) {
+                console.error('Error al eliminar:', error);
+                alert('Ocurrió un error al eliminar el contacto.');
+            } else {
+                setGuests((prev) => prev.filter((g) => g.id !== id));
+            }
+            setDeletingId(null);
+        }, 300); // Animación de fade-out
+    };
 
     return (
-        <div className="overflow-x-auto rounded-lg shadow">
-            <table className="min-w-full bg-white border border-gray-200">
-                <thead className="bg-gray-100">
-                    <tr>
-                    <th className="px-4 py-2 text-left">Nombre y Apellido</th>
-                        <th className="px-4 py-2 text-left">Email</th>
-                        <th className="px-4 py-2 text-left">Asistencia</th>
-                        <th className="px-4 py-2 text-left">Restricciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {guests.map((guest) => (
-                        <tr key={guest.id} className="border-t border-gray-200 hover:bg-gray-50 transition-colors">
-                            <td className="px-4 py-2">{guest.nombre_apellido}</td>
-                            <td className="px-4 py-2">{guest.email}</td>
-                            <td className="px-4 py-2">{guest.asistencia ? 'Sí' : 'No'}</td>
-                            <td className="px-4 py-2">{guest.restricciones || '—'}</td>
+        <div className="space-y-4">
+            {/* 🔍 Buscador */}
+            {/* 📊 Resumen */}
+            <div className="bg-white p-4 rounded-lg shadow grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-gray-800">
+                <div className="flex flex-col items-center">
+                    <span className="text-lg font-semibold">{total}</span>
+                    <span>Total respuestas</span>
+                </div>
+                <div className="flex flex-col items-center">
+                    <span className="text-lg font-semibold text-green-600">{confirmados}</span>
+                    <span>Confirmados</span>
+                </div>
+                <div className="flex flex-col items-center">
+                    <span className="text-lg font-semibold text-red-600">{noConfirmados}</span>
+                    <span>No asistirán</span>
+                </div>
+                <div className="flex flex-col items-center">
+                    <span className="text-lg font-semibold text-yellow-600">{conRestricciones}</span>
+                    <span>Con restricciones</span>
+                </div>
+            </div>
+
+            <input
+                type="text"
+                placeholder="Buscar por nombre o apellido..."
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+                className="w-full max-w-md px-4 py-2 border border-gray-300 rounded-lg text-black"
+            />
+
+            {/* 🔍 Filtros */}
+            <div className="flex flex-wrap gap-2 mb-4">
+                <button onClick={() => setFiltro('todos')} className={`px-3 py-1 rounded ${filtro === 'todos' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}>Todos</button>
+                <button onClick={() => setFiltro('confirmados')} className={`px-3 py-1 rounded ${filtro === 'confirmados' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}>Confirmados</button>
+                <button onClick={() => setFiltro('noConfirmados')} className={`px-3 py-1 rounded ${filtro === 'noConfirmados' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}>No asistirán</button>
+                <button onClick={() => setFiltro('conRestricciones')} className={`px-3 py-1 rounded ${filtro === 'conRestricciones' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}>Con restricciones</button>
+            </div>
+
+            {/* 📋 Tabla */}
+            <div className="overflow-x-auto rounded-lg shadow">
+                <table className="min-w-full bg-white border border-gray-200">
+                    <thead className="bg-gray-100">
+                        <tr>
+                            <th className="px-4 py-2 text-left">Nombre y Apellido</th>
+                            <th className="px-4 py-2 text-left">Email</th>
+                            <th className="px-4 py-2 text-left">Asistencia</th>
+                            <th className="px-4 py-2 text-left">Restricciones</th>
+                            <th className="px-4 py-2 text-left">Acciones</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {filteredGuests.map((guest) => (
+                            <tr
+                                key={guest.id}
+                                className={`border-t border-gray-200 hover:bg-gray-50 transition-colors ${
+                                    deletingId === guest.id ? 'opacity-0 transition-opacity duration-300' : ''
+                                }`}
+                            >
+                                <td className="px-4 py-2">{guest.nombre_apellido}</td>
+                                <td className="px-4 py-2">{guest.email}</td>
+                                <td className="px-4 py-2">{guest.asistira ? 'Sí' : 'No'}</td>
+                                <td className="px-4 py-2">{guest.restricciones || '—'}</td>
+                                <td className="px-4 py-2">
+                                    <button
+                                        onClick={() => handleDelete(guest.id)}
+                                        className="text-red-600 hover:text-red-800 transition"
+                                        title="Eliminar contacto"
+                                    >
+                                        <FiTrash2 size={18} />
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 }
