@@ -4,11 +4,13 @@ import { useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { useRouter } from "next/navigation";
 
+
 export default function Formulario() {
     const [nombreApellido, setNombreApellido] = useState("");
     const [asistira, setAsistira] = useState(true);
     const [restricciones, setRestricciones] = useState("");
     const [loading, setLoading] = useState(false);
+    const [email, setEmail] = useState('');
     const router = useRouter();
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -20,6 +22,7 @@ export default function Formulario() {
                 nombre_apellido: nombreApellido,
                 asistira,
                 restricciones: restricciones || null,
+                email,
             },
         ])
         setLoading(false)
@@ -27,7 +30,24 @@ export default function Formulario() {
         if (error) {
             alert("Error al guardar: " + error.message)
         } else {
-            router.push("/enviado")
+            try {
+                const res = await fetch('/api/send', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ to: email, nombre: nombreApellido }),
+                })
+
+                const data = await res.json()
+
+                if (data.success) {
+                    router.push("/enviado")
+                } else {
+                    alert('Error al enviar el correo de confirmación')
+                }
+            } catch (err) {
+                console.error('Error al enviar el correo', err)
+                alert('Error al enviar el correo de confirmación')
+            }
         }
     }
 
@@ -72,6 +92,16 @@ export default function Formulario() {
                     onChange={(e) => setRestricciones(e.target.value)}
                     className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-pink-400 text-black"
                 />
+                <h2 className="text-black">Email</h2>
+                <input
+                    type="email"
+                    placeholder="Tu correo electrónico"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full p-3 border border-gray-300 rounded-lg mb-4 text-black"
+                />
+
                 <button
                     type="submit"
                     disabled={loading}
