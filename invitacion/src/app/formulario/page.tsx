@@ -1,13 +1,14 @@
-"use client"
+"use client";
 
 import { useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { useRouter } from "next/navigation";
+import emailjs from "@emailjs/browser";
 
 export default function Formulario() {
     const [nombreApellido, setNombreApellido] = useState("");
     const [asistira, setAsistira] = useState<boolean | null>(null);
-    const [restricciones, setRestricciones] = useState<'sí' | 'no'>('no');
+    const [restricciones, setRestricciones] = useState<'' | 'sí'>('');
     const [restriccionesText, setRestriccionesText] = useState('');
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState('');
@@ -17,32 +18,20 @@ export default function Formulario() {
         e.preventDefault();
         setLoading(true);
 
-        // Validación para asegurarse de que se haya elegido una opción
         if (asistira === null) {
             alert("Por favor, seleccioná si vas a asistir.");
             setLoading(false);
             return;
         }
 
-        console.log("📝 Enviando a Supabase:", {
-            nombre_apellido: nombreApellido,
-            asistira,
-            restricciones,
-            email,
-        });
-
-        // Si el usuario seleccionó "No" en restricciones, no enviamos el campo
         const restriccionesFinal = restricciones === 'sí' ? restriccionesText : null;
 
-        // Enviar datos a Supabase
         const { data, error } = await supabase.from('respuestas').insert([{
             nombre_apellido: nombreApellido,
-            asistira: asistira === true, // <-- fuerza booleano puro
-            restricciones: restriccionesFinal, // Solo enviamos texto si es "Sí", sino null
+            asistira: asistira === true,
+            restricciones: restriccionesFinal,
             email,
         }]).select("*");
-
-        console.log("📦 Guardado en Supabase:", data);
 
         setLoading(false);
 
@@ -50,22 +39,24 @@ export default function Formulario() {
             alert("Error al guardar: " + error.message);
         } else {
             try {
-                const res = await fetch('/api/send', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ to: email, nombre: nombreApellido }),
-                });
+                // Define cuál plantilla usar según la respuesta
+                const templateId = asistira ? process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID! : process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_NO_ASISTENCIA_ID!;
+                const result = await emailjs.send(
+                    process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+                    templateId,
+                    {
+                        to_email: email,
+                        from_name: "Confirmación de asistencia",
+                        user_name: nombreApellido,
+                    },
+                    process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+                );
 
-                const data = await res.json();
-                console.log("📧 Respuesta del backend /api/send:", data);
-                if (data.success) {
-                    router.push("/enviado");
-                } else {
-                    alert('Error al enviar el correo de confirmación');
-                }
+                console.log("📧 EmailJS resultado:", result);
+                router.push("/enviado");
             } catch (err) {
-                console.error('Error al enviar el correo', err);
-                alert('Error al enviar el correo de confirmación');
+                console.error("❌ Error al enviar el email:", err);
+                alert("Error al enviar el correo de confirmación");
             }
         }
     };
@@ -111,9 +102,8 @@ export default function Formulario() {
 
                 <h2 className="text-black">¿Tenés alguna restricción alimentaria?</h2>
 
-                {/* Selección de sí/no */}
                 <div className="flex items-center mb-4">
-                    <label className="mr-4">
+                    <label>
                         <input
                             type="radio"
                             name="restriccion"
@@ -124,20 +114,8 @@ export default function Formulario() {
                         />
                         Sí
                     </label>
-                    <label>
-                        <input
-                            type="radio"
-                            name="restriccion"
-                            value="no"
-                            checked={restricciones === 'no'}
-                            onChange={() => setRestricciones('no')}
-                            className="mr-2"
-                        />
-                        No
-                    </label>
                 </div>
 
-                {/* Si la opción es "Sí", mostramos el textarea */}
                 {restricciones === 'sí' && (
                     <textarea
                         placeholder="Escribí tus restricciones alimentarias..."
@@ -146,6 +124,8 @@ export default function Formulario() {
                         className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-pink-400 text-black"
                     />
                 )}
+
+                <p className="text-sm text-gray-500 mt-2">Si no tenés ninguna, no selecciones nada.</p>
 
                 <h2 className="text-black">Email</h2>
                 <input

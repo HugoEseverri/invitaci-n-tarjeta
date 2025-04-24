@@ -38,19 +38,22 @@ export default function GuestList() {
             if (filtro === 'confirmados') return guest.asistira;
             if (filtro === 'noConfirmados') return !guest.asistira;
             if (filtro === 'conRestricciones') {
-                // Asegúrate de que no se incluyan 'no' ni valores vacíos en las restricciones
-                return guest.restricciones && guest.restricciones.trim() !== '' && guest.restricciones.toLowerCase() !== 'no';
+                return typeof guest.restricciones === 'string' &&
+                    guest.restricciones.trim() !== '' &&
+                    guest.restricciones.trim().toLowerCase() !== 'no';
             }
-            return true; // todos
+
+            return true;
         });
 
-
-
-    // 📊 Contadores
     const total = guests.length;
     const confirmados = guests.filter(g => g.asistira).length;
     const noConfirmados = guests.filter(g => !g.asistira).length;
-    const conRestricciones = guests.filter(g => g.restricciones?.trim() !== '').length;
+    const conRestricciones = guests.filter(g =>
+        typeof g.restricciones === 'string' &&
+        g.restricciones.trim() !== '' &&
+        g.restricciones.trim().toLowerCase() !== 'no'
+    ).length;
 
     const handleDelete = async (id: number) => {
         const confirmDelete = window.confirm('¿Estás seguro de que querés eliminar este contacto?');
@@ -58,7 +61,6 @@ export default function GuestList() {
 
         setDeletingId(id);
 
-        // Esperar 300ms para la animación de fade-out
         setTimeout(async () => {
             const { error } = await supabase.from('respuestas').delete().eq('id', id);
             if (error) {
@@ -68,13 +70,11 @@ export default function GuestList() {
                 setGuests((prev) => prev.filter((g) => g.id !== id));
             }
             setDeletingId(null);
-        }, 300); // Animación de fade-out
+        }, 300);
     };
 
     return (
         <div className="space-y-4">
-            {/* 🔍 Buscador */}
-            {/* 📊 Resumen */}
             <div className="bg-white p-4 rounded-lg shadow grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-gray-800">
                 <div className="flex flex-col items-center">
                     <span className="text-lg font-semibold">{total}</span>
@@ -102,7 +102,6 @@ export default function GuestList() {
                 className="w-full max-w-md px-4 py-2 border border-gray-300 rounded-lg text-black"
             />
 
-            {/* 🔍 Filtros */}
             <div className="flex flex-wrap gap-2 mb-4">
                 <button onClick={() => setFiltro('todos')} className={`px-3 py-1 rounded ${filtro === 'todos' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}>Todos</button>
                 <button onClick={() => setFiltro('confirmados')} className={`px-3 py-1 rounded ${filtro === 'confirmados' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}>Confirmados</button>
@@ -110,8 +109,7 @@ export default function GuestList() {
                 <button onClick={() => setFiltro('conRestricciones')} className={`px-3 py-1 rounded ${filtro === 'conRestricciones' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}>Con restricciones</button>
             </div>
 
-            {/* 📋 Tabla */}
-            <div className="overflow-x-auto rounded-lg shadow">
+            <div className="hidden md:block overflow-x-auto rounded-lg shadow">
                 <table className="min-w-full bg-white border border-gray-200">
                     <thead className="bg-gray-100">
                         <tr>
@@ -126,13 +124,16 @@ export default function GuestList() {
                         {filteredGuests.map((guest) => (
                             <tr
                                 key={guest.id}
-                                className={`border-t border-gray-200 hover:bg-gray-50 transition-colors ${deletingId === guest.id ? 'opacity-0 transition-opacity duration-300' : ''
-                                    }`}
+                                className={`border-t border-gray-200 hover:bg-gray-50 transition-colors ${deletingId === guest.id ? 'opacity-0 transition-opacity duration-300' : ''}`}
                             >
                                 <td className="px-4 py-2">{guest.nombre_apellido}</td>
                                 <td className="px-4 py-2">{guest.email}</td>
                                 <td className="px-4 py-2">{guest.asistira ? 'Sí' : 'No'}</td>
-                                <td className="px-4 py-2">{guest.restricciones || '—'}</td>
+                                <td className="px-4 py-2">
+                                    {guest.restricciones && guest.restricciones.trim().toLowerCase() !== 'no'
+                                        ? guest.restricciones
+                                        : '—'}
+                                </td>
                                 <td className="px-4 py-2">
                                     <button
                                         onClick={() => handleDelete(guest.id)}
@@ -147,6 +148,34 @@ export default function GuestList() {
                     </tbody>
                 </table>
             </div>
+            <div className="md:hidden space-y-4">
+                {filteredGuests.map((guest) => (
+                    <div key={guest.id} className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition">
+                        <div className="flex justify-between mb-2">
+                            <span className="font-semibold">{guest.nombre_apellido}</span>
+                        </div>
+                        <div className="text-sm text-gray-700 mb-2">
+                            <strong>Email:</strong> {guest.email}
+                        </div>
+                        <div className="text-sm text-gray-700 mb-2">
+                            <strong>Asistencia:</strong> {guest.asistira ? 'Sí' : 'No'}
+                        </div>
+                        <div className="text-sm text-gray-700 mb-2">
+                            <strong>Restricciones:</strong> {guest.restricciones && guest.restricciones.trim().toLowerCase() !== 'no' ? guest.restricciones : '—'}
+                        </div>
+                        <button
+                            onClick={() => handleDelete(guest.id)}
+                            className="text-red-600 hover:text-red-800 transition"
+                            title="Eliminar contacto"
+                        >
+                            <FiTrash2 size={18} />
+                        </button>
+                    </div>
+                ))}
+            </div>
         </div>
+
+
+
     );
 }
