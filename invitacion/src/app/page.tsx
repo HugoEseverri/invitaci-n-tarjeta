@@ -11,18 +11,17 @@ export default function Home() {
     const router = useRouter()
     const [isClient, setIsClient] = useState(false)
 
-    // Efecto para asegurar que el componente solo se renderice en el cliente
     useEffect(() => {
         setIsClient(true)
     }, [])
 
-    // Renderizado personalizado del contador
     const countdownRenderer = ({ days, hours, minutes, seconds, completed }: CountdownRenderProps) => {
         if (completed) {
             return <Completionist />
         } else {
             return (
-                <div className="text-white text-lg mb-8">
+                <div className="text-[#cd9c90] text-lg mb-8">
+                    <h2 className='text-center'>Sólo faltan</h2>
                     <span>{days} días </span>
                     <span>{hours} horas </span>
                     <span>{minutes} minutos </span>
@@ -33,7 +32,7 @@ export default function Home() {
     }
 
     return (
-        <main className="min-h-screen flex flex-col items-center justify-center px-6 py-12 bg-cover bg-center relative" style={{ backgroundImage: "url('/15-2.png')" }}>
+        <main className="min-h-screen flex flex-col items-center justify-center px-6 py-12 pt-[140px] bg-cover bg-center relative" style={{ backgroundImage: "url('/prototipo.png')" }}>
             <div className="absolute inset-0 bg-black opacity-10"></div>
             <motion.h1
                 initial={{ opacity: 0, y: -20 }}
@@ -44,22 +43,21 @@ export default function Home() {
                 ¡Estás invitado!
             </motion.h1>
 
-            <motion.p
+            {/* <motion.p
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.6 }}
                 className="text-white text-lg mb-8 max-w-md z-10"
             >
-                Te esperamos para celebrar juntos un día muy especial. Confirmá tu asistencia con el siguiente botón.
-            </motion.p>
+            </motion.p> */}
 
-            {/* Solo renderiza el Countdown si es el cliente */}
 
             {isClient && (
                 <div className="z-20">
                     <Countdown
                         date={new Date('2025-08-22T23:59:59')}
                         renderer={countdownRenderer}
+                        
                     />
                 </div>
             )}

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { useRouter } from "next/navigation";
 import emailjs from "@emailjs/browser";
+import { toast } from 'react-toastify';
 
 export default function Formulario() {
     const [nombreApellido, setNombreApellido] = useState("");
@@ -12,6 +13,8 @@ export default function Formulario() {
     const [restriccionesText, setRestriccionesText] = useState('');
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState('');
+    const [formEnviado, setFormEnviado] = useState(false);
+
     const router = useRouter();
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -39,7 +42,6 @@ export default function Formulario() {
             alert("Error al guardar: " + error.message);
         } else {
             try {
-                // Define cuál plantilla usar según la respuesta
                 const templateId = asistira ? process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID! : process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_NO_ASISTENCIA_ID!;
                 const result = await emailjs.send(
                     process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
@@ -51,12 +53,14 @@ export default function Formulario() {
                     },
                     process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
                 );
-
-                console.log("📧 EmailJS resultado:", result);
-                router.push("/enviado");
+                toast.success("¡Correo enviado con éxito!");
+                setFormEnviado(true);
+                setTimeout(() => {
+                    router.push("/enviado");
+                }, 2000);
             } catch (err) {
                 console.error("❌ Error al enviar el email:", err);
-                alert("Error al enviar el correo de confirmación");
+                toast.error("Error al enviar el correo de confirmación");
             }
         }
     };
@@ -139,11 +143,14 @@ export default function Formulario() {
 
                 <button
                     type="submit"
-                    disabled={loading}
+                    disabled={loading || formEnviado}
                     className="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 rounded-lg transition"
                 >
-                    {loading ? 'Enviando...' : 'Confirmar'}
+                    {formEnviado ? "Gracias por tu tiempo" : "Confirmar"}
                 </button>
+
+
+
             </form>
         </main>
     );

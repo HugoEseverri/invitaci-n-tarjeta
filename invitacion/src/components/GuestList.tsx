@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { FiTrash2 } from 'react-icons/fi'
+import { toast } from 'react-toastify';
 
 type Guest = {
     id: number;
@@ -55,23 +56,46 @@ export default function GuestList() {
         g.restricciones.trim().toLowerCase() !== 'no'
     ).length;
 
-    const handleDelete = async (id: number) => {
-        const confirmDelete = window.confirm('¿Estás seguro de que querés eliminar este contacto?');
-        if (!confirmDelete) return;
-
-        setDeletingId(id);
-
-        setTimeout(async () => {
-            const { error } = await supabase.from('respuestas').delete().eq('id', id);
-            if (error) {
-                console.error('Error al eliminar:', error);
-                alert('Ocurrió un error al eliminar el contacto.');
-            } else {
-                setGuests((prev) => prev.filter((g) => g.id !== id));
+    const handleDelete = (id: number) => {
+        toast.info(
+            ({ closeToast }) => (
+                <div className="space-y-2">
+                    <p>¿Estás seguro de que querés eliminar este contacto?</p>
+                    <div className="flex gap-2">
+                        <button
+                            onClick={async () => {
+                                closeToast();
+                                setDeletingId(id);
+                                const { error } = await supabase.from('respuestas').delete().eq('id', id);
+                                if (error) {
+                                    toast.error('Ocurrió un error al eliminar.');
+                                } else {
+                                    setGuests((prev) => prev.filter((g) => g.id !== id));
+                                    toast.success('Contacto eliminado.');
+                                }
+                                setDeletingId(null);
+                            }}
+                            className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"
+                        >
+                            Confirmar
+                        </button>
+                        <button
+                            onClick={closeToast}
+                            className="px-3 py-1 bg-gray-200 text-black rounded hover:bg-gray-300"
+                        >
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            ),
+            {
+                autoClose: false,
+                closeOnClick: false,
+                draggable: false,
             }
-            setDeletingId(null);
-        }, 300);
+        );
     };
+
 
     return (
         <div className="space-y-4">
