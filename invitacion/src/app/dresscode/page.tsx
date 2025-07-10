@@ -17,7 +17,7 @@ export default function DressCode() {
                 className="mt-20 ml-6"
             />
             <h2 className="text-3xl mb-4 mt-22 tracking-wider " style={{ fontFamily: "var(--font-playfair)" }}>dress code</h2>
-            <p className="text-[48px] font-semibold italic text-gray-200" style={{ fontFamily: "var(--font-meow)" }}>Elegante</p>
+            <p className="text-[48px] font-semibold italic text-gray-200" style={{ fontFamily: "var(--font-meow)" }}>Gala</p>
             <div className="absolute bottom-10 w-full flex justify-center gap-10 px-6">
                 <motion.button
                     initial={{ opacity: 0, y: 20 }}

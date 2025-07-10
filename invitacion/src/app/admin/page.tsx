@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { motion } from "framer-motion";
 import { Session } from '@supabase/supabase-js'
@@ -9,7 +8,7 @@ import GuestList from "@/components/GuestList";
 
 export default function AdminPage() {
     const supabase = createClientComponentClient();
-    const router = useRouter();
+
     const [session, setSession] = useState<Session | null>(null)
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
