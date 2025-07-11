@@ -19,9 +19,13 @@ export default function Ubicacion() {
                 >
                     ¿Dónde nos encontramos?
                 </h2>
-                <p className="text-3xl mb-10 font-medium">La Rural  <br />Salón de eventos</p>
+                <p className="text-5xl font-medium pb-5" style={{ fontFamily: "var(--font-playfair)" }}>La Rural</p>
+                <p className="text-[30px] leading-2 pt-5" style={{ fontFamily: "var(--font-playfair)" }}>Olavarría</p>
 
                 <motion.a
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, delay: 1.0 }}
                     href="https://www.google.com/maps/place/La+Rural+Salon+de+Eventos/@-36.9027418,-60.3580099,17z/data=!4m6!3m5!1s0x9594450047862435:0xf0b1ef7755a1f8f1!8m2!3d-36.9020951!4d-60.3574593!16s%2Fg%2F11x0x03tp2?entry=ttu&g_ep=EgoyMDI1MDcwNy4wIKXMDSoASAFQAw%3D%3D"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -29,8 +33,10 @@ export default function Ubicacion() {
                     whileTap={{ scale: 0.95 }}
                     className="inline-flex items-center gap-2 px-6 py-3 hover:transition mt-20"
                 >
-                    <MapPin className="w-5 h-5" />
-                    Ver ubicación
+                    <div className="flex flex-col items-center">
+                        <MapPin className="w-10 h-10" />
+                        <p style={{ fontFamily: "var(--font-playfair)" }}>Ver ubicación</p>
+                    </div>
                 </motion.a>
             </motion.div>
             <div className="absolute bottom-10 w-full flex justify-center gap-10 px-6">

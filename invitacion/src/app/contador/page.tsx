@@ -27,21 +27,21 @@ export default function ContadorPage() {
             return <Completionist />;
         } else {
             return (
-                <div className="flex justify-center gap-8 text-white text-2xl mb-8 ">
+                <div className="flex justify-center gap-8 text-white text-2xl mb-8 border-y-1 p-4">
                     <div className="flex flex-col items-center">
-                        <span className="font-bold text-4xl">{days}</span>
+                        <span className=" text-4xl">{days}</span>
                         <span className="text-base">Días</span>
                     </div>
                     <div className="flex flex-col items-center">
-                        <span className="font-bold text-4xl">{hours}</span>
+                        <span className=" text-4xl">{hours}</span>
                         <span className="text-base">Horas</span>
                     </div>
                     <div className="flex flex-col items-center">
-                        <span className="font-bold text-4xl">{minutes}</span>
+                        <span className=" text-4xl">{minutes}</span>
                         <span className="text-base">Minutos</span>
                     </div>
                     <div className="flex flex-col items-center">
-                        <span className="font-bold text-4xl">{seconds}</span>
+                        <span className=" text-4xl">{seconds}</span>
                         <span className="text-base">Segundos</span>
                     </div>
                 </div>
@@ -65,16 +65,29 @@ export default function ContadorPage() {
                 >
                     Celebremos juntos una noche inolvidable
                 </h2>
-                <p className="text-2xl">22.08.2025</p>
+
+                <div className="flex">
+                    <div className="border-y-1 w-40 h-18 mt-[22px] mr-2" ><p className="mt-4 text-[27px]" style={{ fontFamily: "var(--font-playfair)" }}>Viernes</p></div>
+                    <div className="flex flex-col text-[24px]">
+                        <p style={{ fontFamily: "var(--font-playfair)" }}>AGO</p>
+                        <p className="font-bold mb-[5px] text-[30px]" style={{ fontFamily: "var(--font-playfair)" }}>22</p>
+                        <p style={{ fontFamily: "var(--font-playfair)" }}>2025</p>
+                    </div>
+                    <div className="border-y-1 w-40 h-18 mt-[22px] ml-2" >
+                        <p className="mt-4 text-[27px]" style={{ fontFamily: "var(--font-playfair)" }}>21:00hs</p>
+                    </div>
+                </div>
+
+                {/* <p className="text-2xl">22.08.2025</p>
                 <Image
-                    src="/branch.png"
+                    src="/cover.png"
                     width={300}
                     height={15}
                     alt=""
                     className=""
 
                 />
-                <p className="text-2xl mb-6">21 horas</p>
+                <p className="text-2xl mb-6">21 horas</p> */}
 
 
 

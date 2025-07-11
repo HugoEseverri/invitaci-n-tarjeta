@@ -29,7 +29,7 @@ export default function Formulario() {
 
         const restriccionesFinal = restricciones === 'sí' ? restriccionesText : null;
 
-        const { data, error } = await supabase.from('respuestas').insert([{
+        const { error } = await supabase.from('respuestas').insert([{
             nombre_apellido: nombreApellido,
             asistira: asistira === true,
             restricciones: restriccionesFinal,
@@ -66,11 +66,11 @@ export default function Formulario() {
     };
 
     return (
-        <main className="min-h-screen flex items-center justify-center p-6 bg-pink-100">
-            <form onSubmit={handleSubmit} className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 space-y-6">
-                <h1 className="text-2xl font-bold text-pink-600 text-center">Confirmá tu asistencia</h1>
+        <main className="min-h-screen flex items-center justify-center p-6 bg-[url('/fondo.jpg')]">
+            <form onSubmit={handleSubmit} className="w-full max-w-md bg-gray-200 rounded-2xl shadow-xl p-8 space-y-6">
+                <h1 className="text-2xl font-bold text-black text-center">Confirmá tu asistencia</h1>
 
-                <h2 className="text-gray-700">Nombre y apellido</h2>
+                <h2 className="text-black">Nombre y apellido</h2>
                 <input
                     type="text"
                     required
@@ -106,7 +106,7 @@ export default function Formulario() {
 
                 <h2 className="text-black">¿Tenés alguna restricción alimentaria?</h2>
 
-                <div className="flex items-center mb-4">
+                <div className="flex items-center mb-4 text-black">
                     <label>
                         <input
                             type="radio"
@@ -114,7 +114,7 @@ export default function Formulario() {
                             value="sí"
                             checked={restricciones === 'sí'}
                             onChange={() => setRestricciones('sí')}
-                            className="mr-2"
+                            className="mr-2 text-black"
                         />
                         Sí
                     </label>
@@ -144,7 +144,7 @@ export default function Formulario() {
                 <button
                     type="submit"
                     disabled={loading || formEnviado}
-                    className="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 rounded-lg transition"
+                    className="w-full bg-gray-700 hover:bg-pink-600 text-white font-bold py-3 rounded-lg transition"
                 >
                     {formEnviado ? "Gracias por tu tiempo" : "Confirmar"}
                 </button>
