@@ -43,7 +43,7 @@ export default function Formulario() {
         } else {
             try {
                 const templateId = asistira ? process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID! : process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_NO_ASISTENCIA_ID!;
-                const _result = await emailjs.send(
+                await emailjs.send(
                     process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
                     templateId,
                     {
@@ -89,7 +89,7 @@ export default function Formulario() {
                                 name="asistira"
                                 checked={asistira === true}
                                 onChange={() => setAsistira(true)}
-                                
+
                             />
                             Sí
                         </label>
