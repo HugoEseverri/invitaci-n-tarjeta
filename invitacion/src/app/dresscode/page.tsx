@@ -23,6 +23,7 @@ export default function DressCode() {
                     alt="Perchas"
                     className="mt-10 ml-6 w-[250px] h-[90px] "
                     placeholder="blur"
+                    blurDataURL="/perchas.png"
                     priority
                 />
                 <h2 className="text-4xl mb-4 mt-12 tracking-wider text-white" style={{ fontFamily: "var(--font-playfair)" }}>dress code</h2>
