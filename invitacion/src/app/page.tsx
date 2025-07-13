@@ -13,7 +13,7 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.2 }}
                 style={{ fontFamily: "var(--font-meow)" }}
-                className="text-[100px] -mt-15 mr-8 "
+                className="text-[100px] -mt-20 mr-7 "
             >
                 Elena
             </motion.h1>
@@ -22,7 +22,7 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.2, delay: 0.3 }}
                 style={{ fontFamily: "var(--font-playfair)" }}
-                className="text-[30px] font-medium mr-4"
+                className="text-[30px] font-medium mr-2"
             >
                 Mis XV
             </motion.h2>

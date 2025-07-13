@@ -30,7 +30,7 @@ export default function DressCode() {
                     src="/cover.png"
                     width={300}
                     height={15}
-                    alt=""
+                    alt="Flores"
                     className="mt-10"
 
                 />
