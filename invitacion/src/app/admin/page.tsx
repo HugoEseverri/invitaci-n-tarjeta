@@ -35,12 +35,12 @@ export default function AdminPage() {
 
     if (!session) {
         return (
-            <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-200 to-pink-400 text-gray-700">
+            <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-400 to-gray-700 text-gray-700">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="bg-white p-8 rounded-xl shadow-xl max-w-md w-full"
+                    className="bg-white p-8 rounded-xl shadow-xl max-w-md w-full -mt-30"
                 >
                     <h2 className="text-2xl font-bold mb-6 text-center">Acceso Administrador</h2>
                     <input
@@ -70,7 +70,7 @@ export default function AdminPage() {
         )
     }
     return (
-        <main className="min-h-screen p-8 bg-gray-600 text-black">
+        <main className="min-h-screen max-h-screen overflow-y-auto p-8 bg-gray-600 text-black">
             <h1 className="text-3xl font-bold mb-6">Panel de administración 🎉</h1>
             <GuestList />
         </main>
