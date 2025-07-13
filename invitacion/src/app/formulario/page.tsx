@@ -66,7 +66,8 @@ export default function Formulario() {
     };
 
     return (
-        <main className="min-h-screen flex items-center justify-center p-6 bg-[url('/fondo.jpg')]">
+        <main className="min-h-screen max-h-screen overflow-y-auto flex items-center justify-center p-6 bg-[url('/fondo.jpg')]">
+
             <form onSubmit={handleSubmit} className="w-full max-w-md bg-gray-800 shadow-xl p-8 space-y-6 " style={{ fontFamily: "var(--font-playfair)" }}>
                 <h1 className="text-2xl font-bold  text-center tracking-wider">Confirmá tu asistencia</h1>
 

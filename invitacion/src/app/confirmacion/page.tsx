@@ -16,7 +16,7 @@ export default function Confirmacion() {
                 transition={{ duration: 1 }}
                 className="flex flex-col items-center"
             >
-                <h2 className="text-3xl mb-4 mt-32 tracking-wider w-[350px] text-center leading-[36px] " style={{ fontFamily: "var(--font-playfair)" }}>¿Venís a celebrar conmigo?</h2>
+                <h2 className="text-3xl mb-4 mt-22 tracking-wider w-[350px] text-center leading-[36px] " style={{ fontFamily: "var(--font-playfair)" }}>¿Venís a celebrar conmigo?</h2>
             </motion.div>
             <motion.button
                 whileHover={{ scale: 1.1 }}

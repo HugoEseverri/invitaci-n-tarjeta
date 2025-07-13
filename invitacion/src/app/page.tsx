@@ -13,7 +13,7 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.2 }}
                 style={{ fontFamily: "var(--font-meow)" }}
-                className="text-[100px] -mt-15 mr-4 "
+                className="text-[100px] -mt-15 mr-8 "
             >
                 Elena
             </motion.h1>

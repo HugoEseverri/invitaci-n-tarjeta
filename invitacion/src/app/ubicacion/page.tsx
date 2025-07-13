@@ -14,7 +14,7 @@ export default function Ubicacion() {
                 transition={{ duration: 1 }}
             >
                 <h2
-                    className="text-[48px] md:text-5xl  mb-20 mt-40"
+                    className="text-[48px] md:text-5xl  mb-10 mt-30"
                     style={{ fontFamily: "var(--font-meow)" }}
                 >
                     ¿Dónde nos encontramos?
