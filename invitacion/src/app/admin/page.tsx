@@ -5,6 +5,7 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { motion } from "framer-motion";
 import { Session } from '@supabase/supabase-js'
 import GuestList from "@/components/GuestList";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function AdminPage() {
     const supabase = createClientComponentClient();
@@ -12,6 +13,7 @@ export default function AdminPage() {
     const [session, setSession] = useState<Session | null>(null)
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState("");
 
     useEffect(() => {
@@ -51,16 +53,24 @@ export default function AdminPage() {
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <input
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         placeholder="Contraseña"
                         className="w-full p-3 border rounded-lg mb-4"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
+                    <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+                        aria-label="Mostrar u ocultar contraseña"
+                    >
+                        {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                    </button>
                     {error && <p className="text-red-500 mb-4 text-sm">{error}</p>}
                     <button
                         onClick={handleLogin}
-                        className="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-4 rounded-lg w-full transition"
+                        className="bg-black hover:bg-gray-400 text-white font-semibold py-2 px-4 rounded-lg w-full transition"
                     >
                         Iniciar sesión
                     </button>
