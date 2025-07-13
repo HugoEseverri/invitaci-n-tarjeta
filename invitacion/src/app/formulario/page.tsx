@@ -43,7 +43,7 @@ export default function Formulario() {
         } else {
             try {
                 const templateId = asistira ? process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID! : process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_NO_ASISTENCIA_ID!;
-                const result = await emailjs.send(
+                const _result = await emailjs.send(
                     process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
                     templateId,
                     {
