@@ -7,13 +7,13 @@ export default function Home() {
     const router = useRouter();
 
     return (
-        <main className="h-screen flex flex-col items-center justify-center px-6 text-white text-center relative bg-[url('/fondo.jpg')]">
+        <main className="h-screen flex flex-col items-center justify-center text-white text-center relative bg-[url('/fondo.jpg')]">
             <motion.h1
                 initial={{ opacity: 0, y: -30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.2 }}
                 style={{ fontFamily: "var(--font-meow)" }}
-                className="text-[100px] mb-4"
+                className="text-[100px] -mt-15 mr-4 "
             >
                 Elena
             </motion.h1>
@@ -22,7 +22,7 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.2, delay: 0.3 }}
                 style={{ fontFamily: "var(--font-playfair)" }}
-                className="text-[30px] font-medium"
+                className="text-[30px] font-medium mr-4"
             >
                 Mis XV
             </motion.h2>
@@ -32,7 +32,7 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 1.5 }}
                 onClick={() => router.push("/contador")}
-                className="absolute bottom-10 text-white text-3xl"
+                className="absolute bottom-20 text-white text-3xl"
                 aria-label="Siguiente sección"
             >
                 &gt;
