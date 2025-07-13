@@ -69,20 +69,20 @@ export default function Formulario() {
         <main className="min-h-screen max-h-screen overflow-y-auto flex items-center justify-center p-6 bg-[url('/fondo.jpg')]">
 
             <form onSubmit={handleSubmit} className="w-full max-w-md bg-gray-800 shadow-xl p-8 space-y-6 " style={{ fontFamily: "var(--font-playfair)" }}>
-                <h1 className="text-2xl font-bold  text-center tracking-wider">Confirmá tu asistencia</h1>
+                <h1 className="text-2xl font-bold  text-center tracking-wider text-white">Confirmá tu asistencia</h1>
 
-                <h2 className="text-[20px] tracking-wider">Nombre y apellido</h2>
+                <h2 className="text-[20px] tracking-wider text-white">Nombre y apellido</h2>
                 <input
                     type="text"
                     required
                     placeholder="Escribí acá tu respuesta"
                     value={nombreApellido}
                     onChange={(e) => setNombreApellido(e.target.value)}
-                    className="w-full border-b border-gray-300 text-[18px] tracking-wider p-3 focus:outline-none"
+                    className="w-full border-b border-gray-300 text-[18px] text-white tracking-wider p-3 focus:outline-none"
                 />
 
                 <div className="flex flex-col space-y-2">
-                    <label className="text-[20px] font-medium tracking-wider">¿Vas a asistir?</label>
+                    <label className="text-[20px] font-medium tracking-wider text-white">¿Vas a asistir?</label>
                     <div className="flex gap-4">
                         <label className="flex items-center gap-2 mr-4 mt-2">
                             <input
@@ -90,6 +90,7 @@ export default function Formulario() {
                                 name="asistira"
                                 checked={asistira === true}
                                 onChange={() => setAsistira(true)}
+                                className="text-white"
 
                             />
                             Sí
@@ -100,13 +101,14 @@ export default function Formulario() {
                                 name="asistira"
                                 checked={asistira === false}
                                 onChange={() => setAsistira(false)}
+                                className="text-white"
                             />
                             No
                         </label>
                     </div>
                 </div>
 
-                <h2 className="text-[20px] tracking-wider">¿Tenés alguna restricción alimentaria?</h2>
+                <h2 className="text-[20px] tracking-wider text-white">¿Tenés alguna restricción alimentaria?</h2>
 
                 <div className="flex items-center mb-4">
                     <label>
@@ -116,7 +118,7 @@ export default function Formulario() {
                             value="sí"
                             checked={restricciones === 'sí'}
                             onChange={() => setRestricciones('sí')}
-                            className="mr-2 "
+                            className="mr-2 text-white "
                         />
                         Sí
                     </label>
@@ -127,20 +129,20 @@ export default function Formulario() {
                         placeholder="Escribí tus restricciones alimentarias..."
                         value={restriccionesText}
                         onChange={(e) => setRestriccionesText(e.target.value)}
-                        className="w-full border border-gray-300  p-3 focus:outline-none focus:ring-2 tracking-wider"
+                        className="w-full border border-gray-300 text-white p-3 focus:outline-none focus:ring-2 tracking-wider"
                     />
                 )}
 
-                <p className="text-[18px] mt-2 tracking-wider">Si no tenés ninguna, no selecciones nada.</p>
+                <p className="text-[18px] mt-2 tracking-wider text-white">Si no tenés ninguna, no selecciones nada.</p>
 
-                <h2 className="text-[20px]">Email</h2>
+                <h2 className="text-[20px] text-white">Email</h2>
                 <input
                     type="email"
                     placeholder="Tu correo electrónico"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full border-b border-gray-300 text-[18px] p-3 focus:outline-none tracking-wider"
+                    className="w-full border-b border-gray-300 text-[18px] text-white p-3 focus:outline-none tracking-wider"
                 />
 
                 <button
