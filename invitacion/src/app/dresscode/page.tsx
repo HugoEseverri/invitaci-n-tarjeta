@@ -17,7 +17,7 @@ export default function DressCode() {
                 className="flex flex-col items-center"
             >
                 <Image
-                    src="/perchas.png"
+                    src="/perchas.PNG"
                     width={250}
                     height={90}
                     alt="Perchas"
