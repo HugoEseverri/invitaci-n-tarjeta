@@ -27,7 +27,7 @@ export default function Enviado() {
             >
                 <h2 className="text-5xl mb-4 mt-20 tracking-wider w-[350px] text-center leading-[48px] " style={{ fontFamily: "var(--font-meow)" }}>¡Gracias por elegir ser parte de una noche tan especial!</h2>
                 <Image
-                    src="/retroflower3.png"
+                    src="/retroflower3.PNG"
                     width={300}
                     height={90}
                     alt="Perchas"

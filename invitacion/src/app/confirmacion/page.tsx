@@ -37,7 +37,7 @@ export default function Confirmacion() {
                 className="flex flex-col items-center"
             >
                 <Image
-                    src="/cover.png"
+                    src="/cover.PNG"
                     width={300}
                     height={15}
                     alt=""
