@@ -52,21 +52,23 @@ export default function AdminPage() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
-                    <input
-                        type={showPassword ? "text" : "password"}
-                        placeholder="Contraseña"
-                        className="w-full p-3 border rounded-lg mb-4"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <button
-                        type="button"
-                        onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
-                        aria-label="Mostrar u ocultar contraseña"
-                    >
-                        {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                    </button>
+                    <div className="relative w-full mb-4">
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            placeholder="Contraseña"
+                            className="w-full p-3 border rounded-lg pr-10"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <button
+                            type="button"
+                            onClick={() => setShowPassword(!showPassword)}
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+                            aria-label="Mostrar u ocultar contraseña"
+                        >
+                            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                        </button>
+                    </div>
                     {error && <p className="text-red-500 mb-4 text-sm">{error}</p>}
                     <button
                         onClick={handleLogin}
