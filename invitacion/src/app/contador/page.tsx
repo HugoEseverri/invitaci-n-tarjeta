@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import Countdown, { CountdownRenderProps } from "react-countdown";
 import { useState, useEffect } from "react";
-import Image from "next/image";
 
 const Completionist = () => <span>¡El evento comenzó! 🎉</span>;
 
@@ -77,19 +76,6 @@ export default function ContadorPage() {
                         <p className="mt-[14px] text-[27px]" style={{ fontFamily: "var(--font-playfair)" }}>21:00hs</p>
                     </div>
                 </div>
-
-                {/* <p className="text-2xl">22.08.2025</p>
-                <Image
-                    src="/cover.png"
-                    width={300}
-                    height={15}
-                    alt=""
-                    className=""
-
-                />
-                <p className="text-2xl mb-6">21 horas</p> */}
-
-
 
             </motion.div>
             <motion.div
