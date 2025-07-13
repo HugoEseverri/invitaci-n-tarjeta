@@ -34,7 +34,7 @@ export default function Ubicacion() {
                     className="inline-flex items-center gap-2 px-6 py-3 hover:transition mt-20"
                 >
                     <div className="flex flex-col items-center">
-                        <MapPin className="w-10 h-10" />
+                        <MapPin className="w-10 h-10 text-white" />
                         <p className="text-white" style={{ fontFamily: "var(--font-playfair)" }}>Ver ubicación</p>
                     </div>
                 </motion.a>
