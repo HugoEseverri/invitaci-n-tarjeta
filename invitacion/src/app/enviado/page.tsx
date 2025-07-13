@@ -11,7 +11,7 @@ export default function Enviado() {
     useEffect(() => {
         const timer = setTimeout(() => {
             router.push("/");
-        }, 5000);
+        }, 10000);
 
         return () => clearTimeout(timer);
     }, [router]);
