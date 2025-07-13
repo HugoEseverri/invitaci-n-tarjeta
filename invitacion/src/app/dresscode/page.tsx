@@ -24,7 +24,7 @@ export default function DressCode() {
                     className="mt-10 ml-6"
                 />
                 <h2 className="text-4xl mb-4 mt-12 tracking-wider text-white" style={{ fontFamily: "var(--font-playfair)" }}>dress code</h2>
-                <p className="text-[58px] font-semibold italic text-gray-200 mt-12 mr-6 text-white" style={{ fontFamily: "var(--font-meow)" }}>Gala</p>
+                <p className="text-[58px] font-semibold italic text-gray-200 mt-12 mr-6" style={{ fontFamily: "var(--font-meow)" }}>Gala</p>
 
                 <Image
                     src="/cover.PNG"
