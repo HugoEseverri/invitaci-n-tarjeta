@@ -21,7 +21,8 @@ export default function DressCode() {
                     width={250}
                     height={90}
                     alt="Perchas"
-                    className="mt-10 ml-6"
+                    className="mt-10 ml-6 w-[250px] h-[90px] "
+                    placeholder="blur"
                     priority
                 />
                 <h2 className="text-4xl mb-4 mt-12 tracking-wider text-white" style={{ fontFamily: "var(--font-playfair)" }}>dress code</h2>
