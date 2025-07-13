@@ -42,7 +42,7 @@ export default function AdminPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="bg-white p-8 rounded-xl shadow-xl max-w-md w-full -mt-30"
+                    className="bg-white p-8 rounded-xl shadow-xl max-w-md w-full -mt-80"
                 >
                     <h2 className="text-2xl font-bold mb-6 text-center">Acceso Administrador</h2>
                     <input
