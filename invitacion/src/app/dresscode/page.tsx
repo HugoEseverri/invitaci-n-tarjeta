@@ -39,10 +39,10 @@ export default function DressCode() {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => router.push('/formulario')}
-                className=" text-white border-2 font-semibold py-3 px-6 rounded-lg shadow-md transition z-10 cursor-pointer mt-10"
+                className=" text-white border-2 font-semibold py-3 px-6 rounded-lg shadow-md cursor-pointer mt-10"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 1.5 }}
+                transition={{ duration: 1 }}
             >
                 Confirmar asistencia
             </motion.button>
