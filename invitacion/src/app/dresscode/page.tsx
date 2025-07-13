@@ -18,13 +18,13 @@ export default function DressCode() {
             >
                 <Image
                     src="/perchas.png"
-                    width={200}
-                    height={70}
+                    width={250}
+                    height={90}
                     alt="Perchas"
                     className="mt-10 ml-6"
                 />
-                <h2 className="text-3xl mb-4 mt-12 tracking-wider " style={{ fontFamily: "var(--font-playfair)" }}>dress code</h2>
-                <p className="text-[48px] font-semibold italic text-gray-200" style={{ fontFamily: "var(--font-meow)" }}>Gala</p>
+                <h2 className="text-4xl mb-4 mt-12 tracking-wider " style={{ fontFamily: "var(--font-playfair)" }}>dress code</h2>
+                <p className="text-[58px] font-semibold italic text-gray-200 mt-12" style={{ fontFamily: "var(--font-meow)" }}>Gala</p>
 
                 <Image
                     src="/cover.png"
@@ -34,26 +34,6 @@ export default function DressCode() {
                     className="mt-10"
 
                 />
-            </motion.div>
-            <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => router.push('/formulario')}
-                className=" text-white border-2 font-semibold py-3 px-6 rounded-lg shadow-md cursor-pointer mt-10"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1 }}
-            >
-                Confirmar asistencia
-            </motion.button>
-            <motion.div
-                initial={{ opacity: 0, y: 0 }}
-                animate={{ opacity: 1, y: -20 }}
-                transition={{ duration: 1 }}
-                className="flex flex-col items-center"
-            >
-            <h2 className="text-2xl mb-4 mt-20 tracking-wider w-[320px] text-center" style={{ fontFamily: "var(--font-playfair)" }}>No olvides confirmar tu asistencia</h2>
-
             </motion.div>
             <div className="absolute bottom-10 w-full flex justify-center gap-10 px-6">
                 <motion.button
@@ -71,7 +51,7 @@ export default function DressCode() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, delay: 1.5 }}
-                    onClick={() => router.push("/dresscode")}
+                    onClick={() => router.push("/confirmacion")}
                     className="text-white text-3xl"
                     aria-label="Siguiente sección"
                 >

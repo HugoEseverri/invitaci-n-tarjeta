@@ -67,14 +67,14 @@ export default function ContadorPage() {
                 </h2>
 
                 <div className="flex">
-                    <div className="border-y-1 w-40 h-18 mt-[22px] mr-2" ><p className="mt-4 text-[27px]" style={{ fontFamily: "var(--font-playfair)" }}>Viernes</p></div>
+                    <div className="border-y-1 w-40 h-18 mt-[22px] mr-2" ><p className="mt-[14px] text-[27px]" style={{ fontFamily: "var(--font-playfair)" }}>Viernes</p></div>
                     <div className="flex flex-col text-[24px]">
                         <p style={{ fontFamily: "var(--font-playfair)" }}>AGO</p>
-                        <p className="font-bold mb-[5px] text-[30px]" style={{ fontFamily: "var(--font-playfair)" }}>22</p>
-                        <p style={{ fontFamily: "var(--font-playfair)" }}>2025</p>
+                        <p className="font-bold text-[30px] -mt-[2px]" style={{ fontFamily: "var(--font-playfair)" }}>22</p>
+                        <p className="-mt-2" style={{ fontFamily: "var(--font-playfair)" }}>2025</p>
                     </div>
                     <div className="border-y-1 w-40 h-18 mt-[22px] ml-2" >
-                        <p className="mt-4 text-[27px]" style={{ fontFamily: "var(--font-playfair)" }}>21:00hs</p>
+                        <p className="mt-[14px] text-[27px]" style={{ fontFamily: "var(--font-playfair)" }}>21:00hs</p>
                     </div>
                 </div>
 
