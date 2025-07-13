@@ -25,7 +25,7 @@ export default function Enviado() {
                 transition={{ duration: 1 }}
                 className="flex flex-col items-center mt-20"
             >
-                <h2 className="text-5xl mb-4 mt-20 tracking-wider w-[350px] text-center leading-[48px] " style={{ fontFamily: "var(--font-meow)" }}>¡Gracias por elegir ser parte de una noche tan especial!</h2>
+                <h2 className="text-5xl mb-4 mt-20 tracking-wider w-[350px] text-center leading-[48px] text-white " style={{ fontFamily: "var(--font-meow)" }}>¡Gracias por elegir ser parte de una noche tan especial!</h2>
                 <Image
                     src="/retroflower3.PNG"
                     width={300}
