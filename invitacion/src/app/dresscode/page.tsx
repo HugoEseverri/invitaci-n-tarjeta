@@ -22,6 +22,7 @@ export default function DressCode() {
                     height={90}
                     alt="Perchas"
                     className="mt-10 ml-6"
+                    priority
                 />
                 <h2 className="text-4xl mb-4 mt-12 tracking-wider text-white" style={{ fontFamily: "var(--font-playfair)" }}>dress code</h2>
                 <p className="text-[58px] font-semibold italic text-gray-200 mt-12 mr-6" style={{ fontFamily: "var(--font-meow)" }}>Gala</p>
