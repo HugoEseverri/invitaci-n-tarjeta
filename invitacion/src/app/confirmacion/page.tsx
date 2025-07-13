@@ -22,7 +22,7 @@ export default function Confirmacion() {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => router.push('/formulario')}
-                className=" text-white border-2 text-[20px] font-semibold py-4 px-8 rounded-lg shadow-md cursor-pointer mt-12 mb-10"
+                className=" text-white border-2 text-[20px] font-semibold py-4 px-8 rounded-lg shadow-md cursor-pointer mt-12 mb-10 tracking-wider"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1 }}

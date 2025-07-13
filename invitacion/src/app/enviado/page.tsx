@@ -2,6 +2,8 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function Enviado() {
     const router = useRouter();
@@ -15,13 +17,24 @@ export default function Enviado() {
     }, [router]);
 
     return (
-        <main className="min-h-screen flex items-center justify-center bg-green-100 p-6">
-            <div className="bg-white rounded-2xl shadow-lg p-8 text-center max-w-md">
-                <h1 className="text-2xl font-bold text-green-600 mb-4">¡Gracias por confirmar!</h1>
-                <p className="text-gray-700">
-                    Tu respuesta fue registrada correctamente. En breve recibirás un email de confirmación.
-                </p>
-            </div>
-        </main>
+
+        <section className="h-screen flex flex-col items-center text-white px-6 py-12 bg-black bg-[url('/fondo.jpg')]">
+            <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1 }}
+                className="flex flex-col items-center mt-20"
+            >
+                <h2 className="text-3xl mb-4 mt-30 tracking-wider w-[350px] text-center leading-[48px] " style={{ fontFamily: "var(--font-playfair)" }}>¡Gracias por elegir ser parte de una noche tan especial!</h2>
+                <Image
+                    src="/retroflower3.png"
+                    width={300}
+                    height={90}
+                    alt="Perchas"
+                    className="mt-10"
+                />
+
+            </motion.div>
+        </section>
     );
 }
