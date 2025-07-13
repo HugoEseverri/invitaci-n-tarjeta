@@ -84,7 +84,7 @@ export default function Formulario() {
                 <div className="flex flex-col space-y-2">
                     <label className="text-[20px] font-medium tracking-wider text-white">¿Vas a asistir?</label>
                     <div className="flex gap-4">
-                        <label className="flex items-center gap-2 mr-4 mt-2">
+                        <label className="flex items-center gap-2 mr-4 mt-2 text-white">
                             <input
                                 type="checkbox"
                                 name="asistira"
@@ -95,7 +95,7 @@ export default function Formulario() {
                             />
                             Sí
                         </label>
-                        <label className="flex items-center gap-2 mt-2">
+                        <label className="flex items-center gap-2 mt-2 text-white">
                             <input
                                 type="checkbox"
                                 name="asistira"
@@ -111,7 +111,7 @@ export default function Formulario() {
                 <h2 className="text-[20px] tracking-wider text-white">¿Tenés alguna restricción alimentaria?</h2>
 
                 <div className="flex items-center mb-4">
-                    <label>
+                    <label className="text-white">
                         <input
                             type="checkbox"
                             name="restriccion"
