@@ -17,7 +17,7 @@ export default function DressCode() {
                 className="flex flex-col items-center"
             >
                 <Image
-                    src="/perchas.PNG"
+                    src="/perchas.png"
                     width={250}
                     height={90}
                     alt="Perchas"
@@ -27,7 +27,7 @@ export default function DressCode() {
                 <p className="text-[58px] font-semibold italic text-gray-200 mt-12 mr-6" style={{ fontFamily: "var(--font-meow)" }}>Gala</p>
 
                 <Image
-                    src="/cover.png"
+                    src="/cover.PNG"
                     width={300}
                     height={15}
                     alt="Flores"
