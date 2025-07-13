@@ -14,13 +14,13 @@ export default function Ubicacion() {
                 transition={{ duration: 1 }}
             >
                 <h2
-                    className="text-[48px] md:text-5xl  mb-10 mt-30"
+                    className="text-[48px] md:text-5xl  mb-10 mt-30 text-white"
                     style={{ fontFamily: "var(--font-meow)" }}
                 >
                     ¿Dónde nos encontramos?
                 </h2>
-                <p className="text-5xl font-medium pb-5" style={{ fontFamily: "var(--font-playfair)" }}>La Rural</p>
-                <p className="text-[30px] leading-2 pt-5" style={{ fontFamily: "var(--font-playfair)" }}>Olavarría</p>
+                <p className="text-5xl font-medium pb-5 text-white" style={{ fontFamily: "var(--font-playfair)" }}>La Rural</p>
+                <p className="text-[30px] leading-2 pt-5 text-white" style={{ fontFamily: "var(--font-playfair)" }}>Olavarría</p>
 
                 <motion.a
                     initial={{ opacity: 0, y: 20 }}
@@ -34,8 +34,8 @@ export default function Ubicacion() {
                     className="inline-flex items-center gap-2 px-6 py-3 hover:transition mt-20"
                 >
                     <div className="flex flex-col items-center">
-                        <MapPin className="w-10 h-10" />
-                        <p style={{ fontFamily: "var(--font-playfair)" }}>Ver ubicación</p>
+                        <MapPin className="w-10 h-10 bg-white" />
+                        <p className="text-white" style={{ fontFamily: "var(--font-playfair)" }}>Ver ubicación</p>
                     </div>
                 </motion.a>
             </motion.div>
