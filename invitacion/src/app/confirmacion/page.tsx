@@ -44,7 +44,7 @@ export default function Confirmacion() {
                     className="mt-10"
 
                 />
-                <h2 className="text-2xl mb-4 mt-10 tracking-wider w-[320px] text-center" style={{ fontFamily: "var(--font-playfair)" }}>Para ayudarte a guardar un lugar especial, confirmá antes del</h2>
+                <h2 className="text-2xl mb-4 mt-10 tracking-wider w-[320px] text-center" style={{ fontFamily: "var(--font-playfair)" }}>Para ayudarte a guardar un lugar especial, confirmá antes del <strong>10 de Agosto</strong></h2>
 
             </motion.div>
             <div className="absolute bottom-10 w-full flex justify-center gap-10 px-6">
