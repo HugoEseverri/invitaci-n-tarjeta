@@ -58,7 +58,7 @@ export default function Formulario() {
 
                 setTimeout(() => {
                     if (asistira) {
-                        router.push(`/enviado?nombre=${encodeURIComponent(nombreApellido)}`);
+                        router.push(`/enviado?nombre=${encodeURIComponent(nombreApellido)}&asistira=true`);
                     } else {
                         router.push("/no-asiste");
                     }
@@ -70,6 +70,7 @@ export default function Formulario() {
             }
         }
     };
+
 
     return (
         <main className="min-h-screen max-h-screen overflow-y-auto flex items-center justify-center p-6 bg-[url('/cover4.jpg')]">
