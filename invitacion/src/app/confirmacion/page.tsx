@@ -9,7 +9,7 @@ export default function Confirmacion() {
 
     return (
 
-        <section className="h-screen flex flex-col items-center text-white px-6 py-12 bg-black bg-[url('/fondo.jpg')]">
+        <section className="h-screen flex flex-col items-center text-white px-6 py-12 bg-black bg-[url('/cover4.jpg')]">
             <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}

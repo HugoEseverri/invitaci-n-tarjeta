@@ -7,7 +7,7 @@ export default function Ubicacion() {
     const router = useRouter();
 
     return (
-        <section className="h-screen flex flex-col items-center px-4 text-center bg-[url('/fondo.jpg')]">
+        <section className="h-screen flex flex-col items-center px-4 text-center bg-[url('/cover4.jpg')]">
             <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
