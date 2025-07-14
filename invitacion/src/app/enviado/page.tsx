@@ -55,3 +55,4 @@ export default function Enviado() {
         </section>
     );
 }
+export const dynamic = "force-dynamic";
