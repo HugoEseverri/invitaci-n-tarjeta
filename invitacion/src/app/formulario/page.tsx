@@ -57,13 +57,10 @@ export default function Formulario() {
                 setFormEnviado(true);
 
                 setTimeout(() => {
-                    router.push("/enviado");
-
                     if (asistira) {
-                        const numero = "5492284550648"; // tu número real con código de país sin "+"
-                        const mensaje = `Hola, soy ${nombreApellido}, confirmo mi asistencia a la fiesta 🎉`;
-                        const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
-                        window.open(url, "_blank");
+                        router.push(`/enviado?nombre=${encodeURIComponent(nombreApellido)}`);
+                    } else {
+                        router.push("/no-asiste");
                     }
                 }, 1000);
 
