@@ -41,23 +41,23 @@ export default function Enviado() {
                 className="flex flex-col items-center mt-20"
             >
                 <h2
-                    className="text-5xl mb-4 mt-20 tracking-wider w-[350px] text-center leading-[48px] text-white"
+                    className="text-5xl mb-4 mt-10 tracking-wider w-[350px] text-center leading-[48px] text-white"
                     style={{ fontFamily: "var(--font-meow)" }}
                 >
                     ¡Gracias por elegir ser parte de una noche tan especial!
                 </h2>
                 <h2
-                    className="text-2xl mb-4 mt-20 tracking-wider w-[350px] text-center leading-[30px] text-white"
+                    className="text-2xl mb-4 mt-10 tracking-wider w-[350px] text-center leading-[30px] text-white"
                     style={{ fontFamily: "var(--font-playfair)" }}
                 >
                     ¡Ahora vas a ser redirigida/o a Whatsapp, nos ayudarías confirmando también con un mensaje!
                 </h2>
                 <Image
                     src="/retroflower3.PNG"
-                    width={300}
-                    height={90}
+                    width={270}
+                    height={70}
                     alt="Perchas"
-                    className="mt-10"
+                    className="mt-5"
                 />
             </motion.div>
         </section>
