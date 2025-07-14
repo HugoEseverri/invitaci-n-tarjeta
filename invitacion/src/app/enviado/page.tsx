@@ -17,11 +17,10 @@ export default function Enviado() {
             if (asistira && nombre) {
                 const numero = "5492284550648";
                 const mensaje = `Hola, confirmo mi asistencia a la fiesta. Soy ${nombre} 🎉`;
-                const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
                 window.location.href = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
-
             }
         }, 10000);
+
 
         const redirectTimer = setTimeout(() => {
             router.push("/");
