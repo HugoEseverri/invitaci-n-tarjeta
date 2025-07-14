@@ -55,9 +55,18 @@ export default function Formulario() {
                 );
                 toast.success("¡Correo enviado con éxito!");
                 setFormEnviado(true);
+
                 setTimeout(() => {
                     router.push("/enviado");
-                }, 2000);
+
+                    if (asistira) {
+                        const numero = "5492284550648"; // tu número real con código de país sin "+"
+                        const mensaje = `Hola, soy ${nombreApellido}, confirmo mi asistencia a la fiesta 🎉`;
+                        const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+                        window.open(url, "_blank");
+                    }
+                }, 1000);
+
             } catch (err) {
                 console.error("❌ Error al enviar el email:", err);
                 toast.error("Error al enviar el correo de confirmación");
