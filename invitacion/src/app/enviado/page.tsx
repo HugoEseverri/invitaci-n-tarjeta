@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -8,23 +8,15 @@ import { motion } from "framer-motion";
 export default function Enviado() {
     const router = useRouter();
 
-    // Estado para guardar parámetros desde URL
-    const [nombre, setNombre] = useState<string | null>(null);
-    const [asistira, setAsistira] = useState<boolean>(false);
-
     useEffect(() => {
-        // Leer query params manualmente porque useSearchParams da problemas en prerender
         const params = new URLSearchParams(window.location.search);
-        const nombreParam = params.get("nombre");
-        const asistiraParam = params.get("asistira");
-
-        setNombre(nombreParam);
-        setAsistira(asistiraParam === "true");
+        const nombre = params.get("nombre");
+        const asistira = params.get("asistira") === "true";
 
         const whatsappTimer = setTimeout(() => {
-            if (asistiraParam === "true" && nombreParam) {
+            if (asistira && nombre) {
                 const numero = "5492284550648";
-                const mensaje = `Hola, confirmo mi asistencia a la fiesta. Soy ${nombreParam}🎉`;
+                const mensaje = `Hola, confirmo mi asistencia a la fiesta. Soy ${nombre}🎉`;
                 const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
                 window.open(url, "_blank");
             }
