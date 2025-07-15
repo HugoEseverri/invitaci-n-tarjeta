@@ -33,16 +33,20 @@ export default function Formulario() {
             nombre_apellido: nombreApellido,
             asistira: asistira === true,
             restricciones: restriccionesFinal,
-            email,
+            email: email.trim() || null,
         }]).select("*");
 
         setLoading(false);
 
         if (error) {
-            alert("Error al guardar: " + error.message);
-        } else {
-            try {
-                const templateId = asistira ? process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID! : process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_NO_ASISTENCIA_ID!;
+        alert("Error al guardar: " + error.message);
+    } else {
+        try {
+            if (email.trim()) {
+                const templateId = asistira
+                    ? process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!
+                    : process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_NO_ASISTENCIA_ID!;
+
                 await emailjs.send(
                     process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
                     templateId,
@@ -53,22 +57,27 @@ export default function Formulario() {
                     },
                     process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
                 );
-                toast.success("¡Correo enviado con éxito!");
-                setFormEnviado(true);
 
-                setTimeout(() => {
-                    if (asistira) {
-                        router.push(`/enviado?nombre=${encodeURIComponent(nombreApellido)}&asistira=true`);
-                    } else {
-                        router.push("/no-asiste");
-                    }
-                }, 1000);
-
-            } catch (err) {
-                console.error("❌ Error al enviar el email:", err);
-                toast.error("Error al enviar el correo de confirmación");
+                toast.success("¡Tu respuesta fue registrada con éxito!");
+            } else {
+                toast.info("¡Tu respuesta fue registrada con éxito!");
             }
+
+            setFormEnviado(true);
+
+            setTimeout(() => {
+                if (asistira) {
+                    router.push(`/enviado?nombre=${encodeURIComponent(nombreApellido)}&asistira=true`);
+                } else {
+                    router.push("/no-asiste");
+                }
+            }, 1000);
+
+        } catch (err) {
+            console.error("❌ Error al enviar el email:", err);
+            toast.error("Error al enviar el correo de confirmación");
         }
+    }
     };
 
 
@@ -142,11 +151,10 @@ export default function Formulario() {
 
                 <p className="text-[18px] mt-2 tracking-wider text-white">Si no tenés ninguna, no selecciones nada.</p>
 
-                <h2 className="text-[20px] text-white">Email</h2>
+                <h2 className="text-[20px] text-white">Email (Opcional)</h2>
                 <input
                     type="email"
                     placeholder="Tu correo electrónico"
-                    required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="w-full border-b border-gray-300 text-[18px] text-white p-3 focus:outline-none tracking-wider"
