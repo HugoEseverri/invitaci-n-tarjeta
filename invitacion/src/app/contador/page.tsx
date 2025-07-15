@@ -50,7 +50,7 @@ export default function ContadorPage() {
     };
 
     return (
-        <main className="h-screen flex flex-col items-center px-6 text-white text-center relative bg-cover bg-center bg-[url('/cover4.jpg')]" >
+        <main className="h-screen flex flex-col items-center px-6 text-white text-center relative bg-black bg-[url('/cover4.jpg')]" >
 
             <motion.div
                 initial={{ opacity: 0, y: 20 }}

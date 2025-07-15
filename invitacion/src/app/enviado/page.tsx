@@ -15,7 +15,7 @@ export default function Enviado() {
 
         const whatsappTimer = setTimeout(() => {
             if (asistira && nombre) {
-                const numero = "5492284550648";
+                const numero = "5492284629919";
                 const mensaje = `Hola, confirmo mi asistencia a la fiesta. Soy ${nombre} 🎉`;
                 window.location.href = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
             }
