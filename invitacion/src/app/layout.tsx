@@ -30,7 +30,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Mis XV",
-  description: "Invitación de 15 años",
+  description: "Te invito a mi fiesta",
   icons: {
     icon: '/vector.jpg', 
   },
