@@ -31,6 +31,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Mis XV",
   description: "Invitación de 15 años",
+  icons: {
+    icon: '/vector.jpg', 
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
