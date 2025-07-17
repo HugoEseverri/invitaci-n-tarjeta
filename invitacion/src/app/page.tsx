@@ -7,7 +7,7 @@ export default function Home() {
     const router = useRouter();
 
     return (
-        <main className="h-screen flex flex-col items-center justify-center text-white text-center relative bg-[url('/fondo.jpg')] bg sm:bg-[url('/fondodos.jpg')] sm:bg-no-repeat bg-cover">
+        <main className="h-screen flex flex-col items-center justify-center text-white text-center relative bg-[url('/fondo.jpg')] bg sm:bg-[url('/fondodos.JPG')] sm:bg-no-repeat bg-cover">
             <motion.h1
                 initial={{ opacity: 0, y: -30 }}
                 animate={{ opacity: 1, y: 0 }}
