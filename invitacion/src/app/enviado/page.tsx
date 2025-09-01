@@ -50,7 +50,7 @@ export default function Enviado() {
                     className="text-2xl mb-4 mt-10 tracking-wider w-[350px] text-center leading-[30px] text-white"
                     style={{ fontFamily: "var(--font-playfair)" }}
                 >
-                    ¡Ahora vas a ser redirigida/o a Whatsapp, nos ayudarías confirmando también con un mensaje!
+                    ¡Ahora vas a ser redirigida/o a Whatsapp, nos ayudarías confirmando también con un mensaje😄!
                 </h2>
                 <Image
                     src="/retroflower3.PNG"
